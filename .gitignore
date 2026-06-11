@@ -1,0 +1,38 @@
+# Deny everything by default
+*
+
+# Track this file
+!.gitignore
+
+# Top-level agent context
+!AGENTS.md
+!CLAUDE.md
+!GEMINI.md
+!.mcp.json
+
+# Agent reference docs
+!agents-refs/
+!agents-refs/**
+
+# Claude Code project settings and skills (not local settings or runtime state)
+!.claude/
+!.claude/settings.json
+!.claude/skills/
+!.claude/skills/*/
+!.claude/skills/**/SKILL.md
+
+# kubevirt.io org-level agent context
+!kubevirt.io/
+!kubevirt.io/AGENTS.md
+!kubevirt.io/CLAUDE.md
+!kubevirt.io/GEMINI.md
+!kubevirt.io/.gemini/
+!kubevirt.io/.gemini/settings.json
+!kubevirt.io/.gemini/skills/
+!kubevirt.io/.gemini/skills/*/
+!kubevirt.io/.gemini/skills/**/SKILL.md
+
+# skyconqueror org-level agent context
+!skyconqueror/
+!skyconqueror/AGENTS.md
+!skyconqueror/GEMINI.md

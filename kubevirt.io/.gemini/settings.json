@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "kubevirt-healthcheck": {
+      "command": "kubevirt-healthcheck",
+      "args": []
+    }
+  }
+}
