@@ -25,3 +25,19 @@ Always use `/gemini review` as a PR comment to request a review from Gemini Code
 **Why:** The `/gemini review` slash command is the supported way to trigger Gemini Code Assist reviews. Using the API reviewer request mechanism doesn't reliably trigger the review.
 
 **How to apply:** When the user asks to request a Gemini review on a PR, post a comment with `/gemini review` via `gh pr comment`.
+
+## Keep toolchain Directive When Bumping Go
+
+When bumping the Go version in `go.mod`, do not remove or merge the `toolchain` directive into the `go` directive. Bump them independently: the `go` directive sets the minimum language version, the `toolchain` directive pins the exact compiler version.
+
+**Why:** Removing `toolchain` causes Go to fall back to whatever toolchain is locally installed, losing reproducibility. The two directives serve different purposes and should be managed separately.
+
+**How to apply:** When editing `go.mod` for a version bump, change only the directive the user asked to bump. If bumping the toolchain, leave the `go` line untouched and vice versa.
+
+## No Compound cd Commands
+
+Never chain `cd` with other commands using `&&`, `;`, or pipes. Run `cd` separately, then the actual command in a follow-up call.
+
+**Why:** Claude Code permission patterns match on the first token of the command string. `cd /foo && git log` starts with `cd`, so it doesn't match `Bash(git log *)` and triggers an approval prompt. This matters especially in the containerized harness where read operations are auto-approved.
+
+**How to apply:** When you need to run a command in a different directory, either use the tool's own flag (e.g., `git -C /path log`) or run `cd` first as a separate Bash call, then the command in the next call.
