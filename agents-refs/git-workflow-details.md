@@ -42,6 +42,20 @@ For any repository under `kubevirt.io/`: NEVER push to the `origin` remote. The 
 
 When lint fails, fix the root cause — don't just silence it. Global config over inline `//nolint`, understand errors before suppressing, consistent error handling, no new anti-patterns. See [golangci-lint-failures.md](golangci-lint-failures.md) for details.
 
+## Ginkgo Dot Imports
+
+When writing or modifying Ginkgo/Gomega tests, always use dot imports for the test framework packages:
+
+```go
+import (
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/ginkgo/extensions/table"
+	. "github.com/onsi/gomega"
+)
+```
+
+This allows using `Describe`, `Context`, `It`, `Expect`, `DescribeTable`, `Entry`, etc. without a package qualifier, which is the established convention across the KubeVirt ecosystem.
+
 ## Test Coverage for Touched Code
 
 When modifying or adding code, ensure adequate test coverage:

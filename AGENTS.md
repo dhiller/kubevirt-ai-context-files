@@ -14,6 +14,10 @@ Guidance for AI agents working in this directory tree. Detailed rules are in `ag
 
 Subdirectories are GitHub organization/user clones. See [agents-refs/directory-summaries.md](agents-refs/directory-summaries.md) for details.
 
+## Bash Command Rules
+
+- **No pipes, no chaining** — every `Bash` tool call must be a single simple command. No `|`, `&&`, `;`, or subshells. Use the command's built-in flags to filter/limit output (e.g., `git log -n 20` not `git log | head -20`). See [agents-refs/feedback-rules.md](agents-refs/feedback-rules.md) for examples.
+
 ## Git Guardrails
 
 - **Never commit to the default branch** — always create a feature branch with `--no-track` from the remote ref
@@ -25,7 +29,10 @@ Subdirectories are GitHub organization/user clones. See [agents-refs/directory-s
 - **Validate before committing** — run tests, lint, then ask user approval before `git commit`
 - **Run golangci-lint when config exists** — if `.golangci.yml` or `.golangci.yaml` is present in the repo root, run `golangci-lint run ./...` before committing (or the Makefile `lint`/`go-lint` target if available)
 - **Run goimports after touching imports** — whenever a Go file's imports are added, removed, or reordered, run `goimports` (or `golang.org/x/tools/imports.Process`) on the file so import groups are sorted and grouped per Go conventions
+- **Run yamllint on changed YAML files** — whenever a `.yaml` or `.yml` file is added or modified, run `yamllint <file>` to check formatting before committing
+- **Use yq for YAML distillation and manipulation** — when you need to extract, filter, transform, or merge YAML content, use `yq` (mikefarah/yq) instead of writing ad-hoc scripts or manual edits. Common uses: extracting fields (`yq '.metadata.name' file.yaml`), updating values in place (`yq -i '.spec.replicas = 3' file.yaml`), merging files, and converting between YAML/JSON
 - **Test coverage required** — every added/modified function must have tests calling it directly
+- **Ginkgo dot imports** — when writing Ginkgo/Gomega tests, use dot imports (`. "github.com/onsi/ginkgo"`, `. "github.com/onsi/gomega"`, `. "github.com/onsi/ginkgo/extensions/table"`) so that `Describe`, `It`, `Expect`, `DescribeTable`, `Entry`, etc. are used without a package qualifier
 
 See [agents-refs/git-workflow-details.md](agents-refs/git-workflow-details.md) for full details.
 
@@ -51,6 +58,10 @@ See [agents-refs/pr-guidelines.md](agents-refs/pr-guidelines.md) for full detail
 Prow approve plugin supports OWNERS regex filters. Use `/test {lane}` to trigger specific lanes, `/retest` for all failed required jobs. Never use `/retest {lane}`.
 
 See [agents-refs/prow-knowledge.md](agents-refs/prow-knowledge.md) for full details.
+
+## Research Sources
+
+- **Ginkgo**: when researching Ginkgo capabilities, use the local clone at `onsi/ginkgo` or the official docs at https://onsi.github.io/ginkgo/
 
 ## Reference Files
 

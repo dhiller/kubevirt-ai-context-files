@@ -18,13 +18,23 @@ When triggering multiple test lanes on a PR (e.g., `/test pull-kubevirt-e2e-...`
 
 **How to apply:** Join all `/test <job-name>` lines with newlines into one `gh pr comment --body` call.
 
-## Gemini Review Command
+## Review Command
+
+When user requests to ask for a review, first check which code assist is active - usually it's one of 
+* Gemini Code Assist or
+* CodeRabbit
+
+### Gemini Code Assist
 
 Always use `/gemini review` as a PR comment to request a review from Gemini Code Assist. Do not use the GitHub API to add/remove requested reviewers.
 
 **Why:** The `/gemini review` slash command is the supported way to trigger Gemini Code Assist reviews. Using the API reviewer request mechanism doesn't reliably trigger the review.
 
 **How to apply:** When the user asks to request a Gemini review on a PR, post a comment with `/gemini review` via `gh pr comment`.
+
+### CodeRabbit
+
+To request a review use `@coderabbitai review` as a PR comment.
 
 ## Keep toolchain Directive When Bumping Go
 
@@ -34,10 +44,17 @@ When bumping the Go version in `go.mod`, do not remove or merge the `toolchain` 
 
 **How to apply:** When editing `go.mod` for a version bump, change only the directive the user asked to bump. If bumping the toolchain, leave the `go` line untouched and vice versa.
 
-## No Compound cd Commands
+## No Compound or Piped Commands
 
-Never chain `cd` with other commands using `&&`, `;`, or pipes. Run `cd` separately, then the actual command in a follow-up call.
+Never combine commands using `&&`, `;`, `|`, or any other shell operator. Each tool call must contain exactly one simple command — no pipes, no chaining, no subshells.
 
-**Why:** Claude Code permission patterns match on the first token of the command string. `cd /foo && git log` starts with `cd`, so it doesn't match `Bash(git log *)` and triggers an approval prompt. This matters especially in the containerized harness where read operations are auto-approved.
+**Why:** Claude Code permission patterns match on the full command string. `cd /foo && git log` doesn't match `Bash(git *)`, and `git log | head -20` doesn't match it either because the glob sees `git log | head -20` as the full string, not just the git part. Every compound/piped command triggers an approval prompt.
 
-**How to apply:** When you need to run a command in a different directory, either use the tool's own flag (e.g., `git -C /path log`) or run `cd` first as a separate Bash call, then the command in the next call.
+**How to apply:**
+- **Instead of `cd dir && git log`** → use `git -C dir log` or run `cd` as a separate Bash call first
+- **Instead of `git log | head -20`** → use `git log -n 20`
+- **Instead of `git log | grep pattern`** → use `git log --grep='pattern'`
+- **Instead of `git branch -a | grep foo`** → use `git branch -a --list '*foo*'`
+- **Instead of `git diff | wc -l`** → use `git diff --stat`
+- **Instead of `command | sort | uniq`** → use the command's own flags, or run the command first, then process the output in a second call
+- In general: use the tool's built-in flags to filter/limit output. If no flag exists, run the command alone and process the result in a follow-up call.

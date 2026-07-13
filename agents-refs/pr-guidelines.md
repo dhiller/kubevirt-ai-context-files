@@ -18,6 +18,22 @@ When creating a PR for any repository, check for PR templates in this order:
 
 Fill in the relevant sections of the chosen template and remove or leave empty any sections that don't apply. Checklists should be included as-is for reviewers.
 
+### Build-Analysis-Driven Fixes
+
+When a fix is the result of analyzing a failing build (Prow job or GitHub Actions run), include a **Context** section in the PR description with:
+
+- A one-sentence description of the observed failure
+- A link to the failing build (GitHub Actions run URL or Prow job URL)
+- The step/log line where the failure was visible, if relevant
+
+Example:
+
+```markdown
+## Context
+The `badge-update` GitHub Action was failing with exit code 1 when processing PRs with no Prow CI history.
+Failing run: https://github.com/kubevirt/ci-health/actions/runs/28602777877/job/84815073451#step:4:1058
+```
+
 ### Include Only
 
 - Brief summary of what the PR does
