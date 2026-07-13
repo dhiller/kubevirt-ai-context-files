@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git *)"
+      "Bash(git *)",
+      "Bash(skopeo inspect *)",
+      "Bash(skopeo list-tags *)"
     ],
     "deny": [
       "Read(./kubevirt.io/secrets)",
