@@ -30,6 +30,10 @@ git checkout --no-track -b <descriptive-branch-name> origin/main
 
 Always use a git worktree when making code changes. This keeps the user's working tree untouched and isolates agent work on a separate branch.
 
+Place new worktrees outside the source checkout, under `/tmp`. Never nest worktrees inside a source checkout, including agent-specific directories such as `.claude/worktrees/`, because repository tooling may scan their contents.
+
+Run worktree setup from the target Git repository, not this parent directory. Use `git worktree` or an agent-provided equivalent that supports the required location.
+
 ## Git Remote Configuration
 
 When pushing before creating a PR:
