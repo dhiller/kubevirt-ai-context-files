@@ -25,6 +25,31 @@ Guidance for AI agents working in this directory tree. Detailed rules are in `ag
 
 Subdirectories are GitHub organization/user clones. See [agents-refs/directory-summaries.md](agents-refs/directory-summaries.md) for details.
 
+## Shared Skills
+
+Skills in `~/Projects/github.com/.claude/skills/` may be symlinks to
+definitions owned by another repository. Resolve symlinks before searching
+for repository guidance or editing a skill. Recursive searches may omit
+symlinked directories; inspect the shared directory directly when needed.
+
+The canonical CI-health definitions live in
+`~/Projects/github.com/kubevirt.io/ci-health/.claude/skills/`:
+`analyze-build`, `analyze-ci-failures`, `analyze-pr-builds`,
+`change-relevance`, `flake-overview`, `lane-failure-rate`,
+`test-failure-rate`, and `trigger-pr-jobs`.
+The shared entries are discovery aliases, not independent definitions;
+`change-relevance` currently exists only in the canonical directory.
+`copy-lanes`, `go-dev`, and `pending-reviews` are defined in the shared directory.
+
+Keep one canonical definition per skill and retain existing shared symlinks.
+Edit skills in their owning repository using its applicable guidance and
+worktree workflow, rather than creating copies in discovery directories.
+
+For Kilo, `~/Projects/github.com/kilo.json` registers both directories in
+`skills.paths`. Verify discovery with `kilo debug skill` in a fresh process
+after changing the paths. Check that each expected name appears once and
+that CI-health skill locations resolve to the canonical definitions.
+
 ## Bash Command Rules
 
 - **No pipes, no chaining** — every `Bash` tool call must be a single simple command. No `|`, `&&`, `;`, or subshells. Use the command's built-in flags to filter/limit output (e.g., `git log -n 20` not `git log | head -20`). See [agents-refs/feedback-rules.md](agents-refs/feedback-rules.md) for examples.

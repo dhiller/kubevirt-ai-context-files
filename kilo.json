@@ -1,5 +1,11 @@
 {
   "$schema": "https://app.kilo.ai/config.json",
+  "skills": {
+    "paths": [
+      "~/Projects/github.com/.claude/skills",
+      "~/Projects/github.com/kubevirt.io/ci-health/.claude/skills"
+    ]
+  },
   "disabled_providers": ["kilo", "mistral", "anthropic"],
   "provider": {
     "openai": {
