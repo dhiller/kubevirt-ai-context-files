@@ -9,6 +9,7 @@
 !CLAUDE.md
 !GEMINI.md
 !.mcp.json
+!kilo.json
 
 # Agent reference docs
 !agents-refs/
@@ -32,7 +33,5 @@
 !kubevirt.io/.gemini/skills/*/
 !kubevirt.io/.gemini/skills/**/SKILL.md
 
-# skyconqueror org-level agent context
-!skyconqueror/
-!skyconqueror/AGENTS.md
-!skyconqueror/GEMINI.md
+# Keep Skyconqueror repositories and local context untracked
+/skyconqueror/

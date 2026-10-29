@@ -1,0 +1,24 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  "disabled_providers": ["kilo", "mistral", "anthropic"],
+  "provider": {
+    "openai": {
+      "options": {
+      }
+    },
+    "google-vertex": {
+      "options": {
+        "project": "{env:ANTHROPIC_VERTEX_PROJECT_ID}",
+        "location": "global"
+      }
+    },
+    "gemini": {
+      "options": {
+        "apiKey": "{env:GEMINI_API_KEY}"
+      }
+    }
+  },
+  "permission": {
+    "bash": "allow"
+  }
+}
