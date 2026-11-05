@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git *)",
       "Bash(skopeo inspect *)",
-      "Bash(skopeo list-tags *)"
+      "Bash(skopeo list-tags *)",
+      "Bash(hack/mkpj.sh *)"
     ],
     "deny": [
       "Read(./kubevirt.io/secrets)",

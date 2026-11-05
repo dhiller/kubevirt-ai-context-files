@@ -28,9 +28,7 @@ Reply to a specific comment thread using its comment ID:
 
 ```bash
 gh api repos/{owner}/{repo}/pulls/{number}/comments/{comment_id}/replies \
-  -f body="Fixed in {commit_sha} — {brief description of what changed}.
-
-🤖 Assisted by {agent-name}"
+  -f body="Fixed in {commit_sha} — {brief description of what changed}."
 ```
 
 Keep replies concise: state what was fixed and how. Include a code snippet only if the fix pattern is non-obvious.
@@ -76,7 +74,8 @@ mutation {
 - **Start with the commit SHA** — e.g., "Fixed in abc1234"
 - **Describe the fix briefly** — what changed and why it addresses the concern
 - **Include a code snippet** only when the fix pattern is non-obvious or the reviewer suggested a specific approach worth confirming
-- **End with the AI trailer** — `🤖 Assisted by {agent-name}`
+- **Do not repeat AI attribution in thread replies** - keep the footer on the main generated PR
+  description or review summary instead, following the GitHub guidelines in `../AGENTS.md`.
 - **Do not argue with valid feedback** — if the reviewer is right, fix it and say so
 - **Only push back with evidence** — if a suggestion would introduce a regression or is based on a misunderstanding, explain why with references to the code
 

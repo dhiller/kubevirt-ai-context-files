@@ -25,6 +25,9 @@ Guidance for AI agents working in this directory tree. Detailed rules are in `ag
 
 Subdirectories are GitHub organization/user clones. See [agents-refs/directory-summaries.md](agents-refs/directory-summaries.md) for details.
 
+The GitHub organization `kubevirt` maps to the local root `~/Projects/github.com/kubevirt.io/`, not `~/Projects/github.com/kubevirt/`.
+For example, `kubevirt/kubevirtci` is checked out at `kubevirt.io/kubevirtci/` relative to this directory.
+
 ## Shared Skills
 
 Skills in `~/Projects/github.com/.claude/skills/` may be symlinks to
@@ -88,7 +91,12 @@ See [agents-refs/pr-guidelines.md](agents-refs/pr-guidelines.md) for full detail
 
 ## GitHub guidelines
 
-- **Always add a trailer noting the AI assistance** - to every PR description, PR comment, issue description or comment, add a brief footer that says: `🤖 Assisted by {ai-agent-name} using model {selected-model-name}`
+- **Attribute AI assistance on the main generated artifact only** - add the footer
+  `🤖 Assisted by {ai-agent-name} using model {selected-model-name}` to a generated PR description,
+  issue description, or review's main description/summary (including draft reviews). Do not repeat it
+  in associated inline review comments, suggestions, thread replies, or follow-up comments. A standalone
+  generated comment that is not part of a larger generated artifact carries its own footer. Commit
+  `Assisted-by:` trailer requirements remain unchanged.
 
 ## Prow CI
 

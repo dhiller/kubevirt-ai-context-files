@@ -10,6 +10,21 @@ acknowledgment and essential notes only.
 Always submit PR reviews as drafts first. This lets you revisit and refine comments before the author is notified. Only
 publish the review once all files have been reviewed and comments are finalized.
 
+Include the AI-assistance footer only in the review's main description/summary, not in individual
+inline comments, suggestion blocks, or thread replies. This also applies to draft reviews.
+
+## Make Feedback Actionable
+
+Always provide actionable code review feedback. Every review comment must include a concrete suggestion
+for the change, not just identify a problem or ask the author to find a solution. Explain why the change
+is needed and propose replacement code, wording, or specific implementation steps.
+
+For inline comments, use a GitHub `suggestion` block whenever the change can be expressed as a direct
+replacement. Anchor the suggestion to the correct lines and preserve valid syntax and indentation.
+For changes spanning multiple locations or requiring a design decision, include a concrete proposed
+approach and any assumptions instead of an unsafe or speculative patch. Apply this rule to both errors
+and non-blocking nits, including comments in draft reviews.
+
 ## Distinguish Nits from Errors
 
 Every review comment must clearly signal its severity:
