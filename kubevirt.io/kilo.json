@@ -12,12 +12,6 @@
       "options": {
       }
     },
-    "google-vertex": {
-      "options": {
-        "project": "{env:ANTHROPIC_VERTEX_PROJECT_ID}",
-        "location": "global"
-      }
-    },
     "gemini": {
       "options": {
         "apiKey": "{env:GEMINI_API_KEY}"

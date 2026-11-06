@@ -72,6 +72,7 @@ that CI-health skill locations resolve to the canonical definitions.
 - **Run yamllint on changed YAML files** — whenever a `.yaml` or `.yml` file is added or modified, run `yamllint <file>` to check formatting before committing
 - **Use yq for YAML distillation and manipulation** — when you need to extract, filter, transform, or merge YAML content, use `yq` (mikefarah/yq) instead of writing ad-hoc scripts or manual edits. Common uses: extracting fields (`yq '.metadata.name' file.yaml`), updating values in place (`yq -i '.spec.replicas = 3' file.yaml`), merging files, and converting between YAML/JSON
 - **Test coverage required** — every added/modified function must have tests calling it directly
+- **Go testing framework** — Before writing tests, check the repository’s guidance and existing tests for its preferred testing framework. Follow those conventions. If unclear and existing imports reference Ginkgo/Gomega, use Ginkgo/Gomega with dot imports.
 - **Ginkgo dot imports** — when writing Ginkgo/Gomega tests, use dot imports (`. "github.com/onsi/ginkgo"`, `. "github.com/onsi/gomega"`, `. "github.com/onsi/ginkgo/extensions/table"`) so that `Describe`, `It`, `Expect`, `DescribeTable`, `Entry`, etc. are used without a package qualifier
 
 See [agents-refs/git-workflow-details.md](agents-refs/git-workflow-details.md) for full details.
