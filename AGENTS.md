@@ -15,11 +15,17 @@ Guidance for AI agents working in this directory tree. Detailed rules are in `ag
 
 ## Context File Guidelines
 
-- All agent-specific files like CLAUDE.md are actually symlinked to `AGENTS.md`
-- `AGENTS.md` is the primary context file for all agents. If you store agent-specific information, use agent-specific sections (`CLAUDE.md`, `GEMINI.md`) for agent-specific features.
+- Agent-specific entry points such as `CLAUDE.md` may be symlinked to `AGENTS.md`; inspect them before editing and preserve existing symlinks.
+- `AGENTS.md` is the shared local entry point for agents, not the canonical home for project knowledge. Keep repository entry points thin and link human-facing documentation.
 - Subdirectory `AGENTS.md` files contain rules scoped to that directory.
-- None of these files are checked into version control.
-- When adding a rule: if it's about the user personally → Claude memory (`MEMORY.md`). Otherwise → `AGENTS.md` at the appropriate directory level.
+- Local guidance files are generally not checked into version control; verify tracking and ignore status in each repository rather than assuming.
+- When adding guidance: project knowledge → standard repository documentation; local agent workflow → local guidance at the appropriate directory level; personal preferences → Claude memory (`MEMORY.md`).
+
+## Documentation-First Approach
+
+Follow [agents-refs/documentation-guidelines.md](agents-refs/documentation-guidelines.md)
+when changing documentation or agent guidance: keep project knowledge in
+human-facing docs and agent entry points thin.
 
 ## Overview
 
@@ -115,6 +121,7 @@ Follow [agents-refs/markdown-guidelines.md](agents-refs/markdown-guidelines.md) 
 
 ## Reference Files
 
+- [agents-refs/documentation-guidelines.md](agents-refs/documentation-guidelines.md) — documentation-first approach, thin entry points, extraction, and reachability checks
 - [agents-refs/conventional-commits.md](agents-refs/conventional-commits.md) — commit format, types, breaking changes, examples
 - [agents-refs/pr-guidelines.md](agents-refs/pr-guidelines.md) — PR descriptions, Jira sync, Gemini reviews
 - [agents-refs/pr-review-guidelines.md](agents-refs/pr-review-guidelines.md) — PR review process, nit vs error classification, Go review standards
