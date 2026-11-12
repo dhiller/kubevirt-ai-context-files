@@ -50,10 +50,15 @@ For example, `kubevirt/kubevirtci` is checked out at `kubevirt.io/kubevirtci/` r
 
 ## Shared Skills
 
-Skills in `~/Projects/github.com/.claude/skills/` may be symlinks to
-definitions owned by another repository. Resolve symlinks before searching
-for repository guidance or editing a skill. Recursive searches may omit
-symlinked directories; inspect the shared directory directly when needed.
+Shared skills owned by this context repository live in
+`~/Projects/github.com/.agents/skills/`: `copy-lanes`, `go-dev`, and
+`pending-reviews`. Matching entries in `.claude/skills/` are compatibility
+symlinks, not independent definitions.
+
+Entries in `~/Projects/github.com/.claude/skills/` may also point to skills owned
+by another repository. Resolve symlinks before searching for repository guidance
+or editing a skill. Recursive searches may omit symlinked directories; inspect
+the shared directories directly when needed.
 
 The canonical CI-health definitions live in
 `~/Projects/github.com/kubevirt.io/ci-health/.claude/skills/`:
@@ -62,16 +67,17 @@ The canonical CI-health definitions live in
 `test-failure-rate`, and `trigger-pr-jobs`.
 The shared entries are discovery aliases, not independent definitions;
 `change-relevance` currently exists only in the canonical directory.
-`copy-lanes`, `go-dev`, and `pending-reviews` are defined in the shared directory.
 
 Keep one canonical definition per skill and retain existing shared symlinks.
 Edit skills in their owning repository using its applicable guidance and
 worktree workflow, rather than creating copies in discovery directories.
 
-For Kilo, `~/Projects/github.com/kilo.json` registers both directories in
-`skills.paths`. Verify discovery with `kilo debug skill` in a fresh process
-after changing the paths. Check that each expected name appears once and
-that CI-health skill locations resolve to the canonical definitions.
+When configuring explicit skill sources, use `.agents/skills/` for this
+repository's skills and the canonical CI-health directory for CI-health skills.
+Do not register both compatibility aliases and their targets as separate sources.
+Verify discovery in a fresh process after changing paths: each expected name
+should appear once and resolve to its canonical definition. For Kilo, inspect the
+active `skills.paths` configuration and verify with `kilo debug skill`.
 
 ## Bash Command Rules
 
