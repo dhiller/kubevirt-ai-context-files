@@ -24,6 +24,9 @@ This directory contains the KubeVirt organization's collection of repositories. 
 
 When a user mentions a **SIG** or **WG** in the context of creating an issue, apply the label via Prow command (`/sig {name}` or `/wg {name}`) in the issue body or as a comment.
 
+For operator-related tests or failures (including tests tagged `sig-operator`),
+use `/sig control-plane` when tagging GitHub issues, not `/sig operator`.
+
 | SIG labels | WG labels |
 |---|---|
 | `sig/api`, `sig/buildsystem`, `sig/ci`, `sig/compute`, `sig/control-plane`, `sig/documentation`, `sig/network`, `sig/observability`, `sig/release`, `sig/scale`, `sig/security`, `sig/storage`, `sig/testing` | `wg/aie`, `wg/arch-arm`, `wg/arch-s390x`, `wg/code-quality` |
