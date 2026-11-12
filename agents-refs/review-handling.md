@@ -6,20 +6,25 @@ How to address review comments (from Gemini Code Assist, human reviewers, or oth
 
 1. **Fetch all review comments** — use `gh api repos/{owner}/{repo}/pulls/{number}/comments` to get every comment with its ID, path, line, and body.
 2. **Implement the fix** for each comment in the codebase.
-3. **Validate** — run lint, tests, and goimports before committing.
-4. **Commit and push** — a single commit addressing all review feedback is preferred over one commit per comment.
-5. **Reply to each comment** — post a reply on the comment thread explaining what was done. Include the commit SHA for traceability.
-6. **Resolve the thread** — after replying, resolve the thread via the GraphQL API.
-7. **Request a new review** — once all threads are addressed and resolved, ask the reviewer for another pass. For Gemini Code Assist, post `/gemini review` as a PR comment. For human reviewers, use `gh pr edit --add-reviewer {user}` or ask the user whether to re-request review.
+3. **Validate** — run applicable tests, formatters, and lint. Report failures and skipped checks.
+4. **Obtain approval** — present the changes and validation results, explicitly request approval to commit and push, and wait. Follow the [approval policy](git-workflow-details.md#validation-before-committing).
+5. **Commit and push** — publish only the approved changes. A single commit addressing all review feedback is preferred over one commit per comment.
+6. **Reply to addressed comments** — explain what was done and include the commit SHA for traceability.
+7. **Resolve addressed threads** — after replying, resolve only threads whose concerns have actually been addressed.
+8. **Request a new review** — once all threads are addressed and resolved, ask the reviewer for another pass. For Gemini Code Assist, post `/gemini review` as a PR comment. For human reviewers, use `gh pr edit --add-reviewer {user}` or ask the user whether to re-request review.
 
 ## Fetching Comments
+
+Follow the [shell command rules](../AGENTS.md#bash-command-rules).
+Use `gh api --jq` for filtering instead of a shell pipeline.
 
 ```bash
 # REST: list all review comments with IDs
 gh api repos/{owner}/{repo}/pulls/{number}/comments --paginate
 
-# Useful jq filter for overview
-| jq '[.[] | {id, path, line, body: (.body | split("\n")[0:3] | join("\n")), user: .user.login}]'
+# Condensed overview across all pages
+gh api repos/{owner}/{repo}/pulls/{number}/comments --paginate \
+  --jq '.[] | {id, path, line, body: (.body | split("\n")[0:3] | join("\n")), user: .user.login}'
 ```
 
 ## Replying to Comments
@@ -39,12 +44,19 @@ The REST API does not support resolving review threads. Use the GraphQL API:
 
 ### Step 1: Find unresolved thread IDs
 
+Paginate through every thread. The first comment identifies the thread;
+read the full discussion before deciding how to address or resolve it.
+
 ```bash
-gh api graphql -f query='
-{
+gh api graphql --paginate -f query='
+query($endCursor: String) {
   repository(owner: "{owner}", name: "{repo}") {
     pullRequest(number: {number}) {
-      reviewThreads(first: 50) {
+      reviewThreads(first: 100, after: $endCursor) {
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
         nodes {
           id
           isResolved
@@ -55,7 +67,7 @@ gh api graphql -f query='
       }
     }
   }
-}' | jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)]'
+}' --jq '.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved == false)'
 ```
 
 ### Step 2: Resolve each thread

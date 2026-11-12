@@ -4,11 +4,7 @@ Behavioral rules derived from user corrections. Follow these to avoid repeating 
 
 ## No Issue/PR References in Commit Messages
 
-Never include GitHub issue or PR links or references inside commit messages (e.g. `#1234`, `Fixes #1234`, full URLs).
-
-**Why:** Issue/PR references belong in PR descriptions, not commit messages.
-
-**How to apply:** When composing `git commit` messages, omit any `Fixes #N`, `Closes #N`, issue URLs, or PR references. Place those in the PR body instead when creating or editing PRs.
+Follow the canonical [commit reference policy](conventional-commits.md#no-issuepr-references-in-commit-messages).
 
 ## Trigger Tests in a Single Comment
 

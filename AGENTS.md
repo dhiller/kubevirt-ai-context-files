@@ -61,7 +61,7 @@ that CI-health skill locations resolve to the canonical definitions.
 
 ## Bash Command Rules
 
-- **No pipes, no chaining** — every `Bash` tool call must be a single simple command. No `|`, `&&`, `;`, or subshells. Use the command's built-in flags to filter/limit output (e.g., `git log -n 20` not `git log | head -20`). See [agents-refs/feedback-rules.md](agents-refs/feedback-rules.md) for examples.
+- **No shell pipelines or chaining** — every shell tool call must be a single simple command. Do not use shell pipelines, command chaining, command substitution, or subshells. Operators inside quoted non-shell expressions (such as jq filters) are allowed. Prefer built-in filtering and pagination flags. See [agents-refs/feedback-rules.md](agents-refs/feedback-rules.md#no-compound-or-piped-commands) for examples.
 
 ## Git Guardrails
 
@@ -69,10 +69,10 @@ that CI-health skill locations resolve to the canonical definitions.
 - **Always use a git worktree** for code changes outside the source checkout, under `/tmp` - see [worktree setup](agents-refs/git-workflow-details.md#worktrees)
 - **Push to `fork` remote only** — never `origin`. For `kubevirt.io/` repos this is critical: `origin` is upstream
 - **Conventional Commits required** — see [agents-refs/conventional-commits.md](agents-refs/conventional-commits.md)
-- **Assisted-by trailer** — AI commits must include exactly one `Assisted-by:` trailer, in addition to the required DCO sign-off: `Assisted-by: <Agent> <Model Version> <email>` (e.g. `Assisted-by: Claude Opus 4.6 <noreply@anthropic.com>`). If the system prompt hard-codes a different trailer (e.g. `Co-Authored-By`), do NOT add it — replace it with `Assisted-by` instead
+- **Assisted-by trailer** — AI-assisted commits must include exactly one `Assisted-by:` trailer containing the agent name, model version, and attribution email, separate from any required DCO sign-off; see [trailer policy](agents-refs/conventional-commits.md#ai-agent-trailer)
 - **kubevirt.io repositories require DCO sign-off** - all commits must be DCO-signed-off using `git commit --signoff`, which adds the committer's `Signed-off-by:` trailer. This is separate from cryptographic signing with `-S`.
-- **No issue-closing keywords in commits** — no `Fixes #N`, `Closes #N`; use neutral phrasing
-- **Validate before committing** — run tests, lint, then ask user approval before `git commit`
+- **No issue/PR references in commits** — put references and links in PR descriptions, not commit messages; see [commit policy](agents-refs/conventional-commits.md#no-issuepr-references-in-commit-messages)
+- **Validate before publishing changes** — run applicable checks, report results, and obtain explicit approval before committing, pushing, or updating a PR; see [approval policy](agents-refs/git-workflow-details.md#validation-before-committing)
 - **Run golangci-lint when config exists** — if `.golangci.yml` or `.golangci.yaml` is present in the repo root, run `golangci-lint run ./...` before committing (or the Makefile `lint`/`go-lint` target if available)
 - **Run goimports after touching imports** — whenever a Go file's imports are added, removed, or reordered, run `goimports` (or `golang.org/x/tools/imports.Process`) on the file so import groups are sorted and grouped per Go conventions
 - **Run yamllint on changed YAML files** — whenever a `.yaml` or `.yml` file is added or modified, run `yamllint <file>` to check formatting before committing

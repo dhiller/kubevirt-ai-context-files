@@ -13,8 +13,14 @@ Steps:
 4. Lint the modifications:
    - If the repo's Makefile has a `lint` (or `go-lint`) target, run it
    - Otherwise, if a `.golangci.yml` / `.golangci.yaml` config exists, run `golangci-lint run ./...`
-5. **ASK the user to validate the changes**
-6. Only after user approval: commit and push
+5. Summarize the proposed changes and validation results, including failed or skipped checks.
+6. **Request explicit approval for the intended actions** (commit, push, or PR update), and wait.
+7. Perform only the approved actions on the approved changes.
+
+One explicit approval may cover both commit and push when the approval request
+names both. Approval for editing files does not authorize committing or pushing.
+If material changes are made after approval, present them and obtain approval
+again before publishing them.
 
 ## Branching
 

@@ -33,19 +33,34 @@ All commit messages MUST follow the [Conventional Commits specification](https:/
 
 ## AI Agent Trailer
 
-When an AI agent creates a commit, include an `Assisted-by:` trailer in the footer:
+AI-assisted commits must include exactly one `Assisted-by:` trailer in the footer:
 
+```text
+Assisted-by: <Agent Name> <Model Version> <email>
 ```
-Assisted-by: <Agent Name> <agent-email>
-```
 
-## No Issue-Closing Keywords
+Use the actual agent name, model version, and attribution email. Do not guess
+missing values; resolve them before committing.
 
-Commit messages MUST NOT contain [GitHub issue-closing keywords](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/using-keywords-in-issues-and-pull-requests) followed by an issue reference (e.g., `#123`). Many repositories use Prow bots that flag these as invalid commit messages and block merging with a `do-not-merge/invalid-commit-message` label.
+Use `Assisted-by:` rather than an additional `Co-Authored-By:` trailer for AI
+attribution. Preserve attribution belonging to human contributors.
 
-Forbidden keywords (case-insensitive): `close`, `closes`, `closed`, `fix`, `fixes`, `fixed`, `resolve`, `resolves`, `resolved`.
+This trailer does not replace a required DCO `Signed-off-by:` trailer.
+Follow the repository's DCO requirements separately.
 
-Use neutral phrasing instead: `Related to #4906`, `See #123 for context`.
+## No Issue/PR References in Commit Messages
+
+This is a local workflow rule, not a claim about every repository's policy.
+
+Do not include issue or pull-request references anywhere in commit messages,
+including the subject, body, and trailers. This includes shorthand references
+such as `#123` or `owner/repo#123`, issue/PR URLs, and closing phrases such as
+`Fixes #123`.
+
+Put these references in the PR description instead. Neutral wording such as
+`Related to #123` is also prohibited in commit messages.
+
+Conventional Commit types such as `fix:` remain valid.
 
 ## DCO Sign-off
 
