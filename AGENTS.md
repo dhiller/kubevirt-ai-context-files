@@ -96,6 +96,12 @@ See [agents-refs/git-workflow-details.md](agents-refs/git-workflow-details.md) f
 
 See [agents-refs/pr-guidelines.md](agents-refs/pr-guidelines.md) for full details.
 
+## Jira
+
+Follow [agents-refs/jira-guidelines.md](agents-refs/jira-guidelines.md) when creating
+or updating Jira issues: propose the creation defaults, present the intended
+changes, and obtain explicit user confirmation before writing to Jira.
+
 ## GitHub guidelines
 
 - **Attribute AI assistance on the main generated artifact only** - add the footer
@@ -124,6 +130,7 @@ Follow [agents-refs/markdown-guidelines.md](agents-refs/markdown-guidelines.md) 
 - [agents-refs/documentation-guidelines.md](agents-refs/documentation-guidelines.md) — documentation-first approach, thin entry points, extraction, and reachability checks
 - [agents-refs/conventional-commits.md](agents-refs/conventional-commits.md) — commit format, types, breaking changes, examples
 - [agents-refs/pr-guidelines.md](agents-refs/pr-guidelines.md) — PR descriptions, Jira sync, Gemini reviews
+- [agents-refs/jira-guidelines.md](agents-refs/jira-guidelines.md) — issue creation defaults, change previews, user confirmation, and preservation of existing values
 - [agents-refs/pr-review-guidelines.md](agents-refs/pr-review-guidelines.md) — PR review process, nit vs error classification, Go review standards
 - [agents-refs/git-workflow-details.md](agents-refs/git-workflow-details.md) — branching, remotes, validation, worktrees, test coverage
 - [agents-refs/directory-summaries.md](agents-refs/directory-summaries.md) — subdirectory/org descriptions
