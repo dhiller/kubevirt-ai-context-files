@@ -27,6 +27,20 @@ Follow [agents-refs/documentation-guidelines.md](agents-refs/documentation-guide
 when changing documentation or agent guidance: keep project knowledge in
 human-facing docs and agent entry points thin.
 
+## Design-First Development
+
+For non-trivial behavioral changes, follow
+[agents-refs/design-first-workflow.md](agents-refs/design-first-workflow.md).
+
+- Present evidence, behavioral contracts, and the proposed design before
+  writing production code; stop for explicit approval.
+- After design approval, write and validate tests; stop for approval before
+  implementing the behavior.
+- Approval applies only to the named phase and scope. Material design changes
+  require renewed approval.
+- Keep routine, behavior-preserving edits lightweight; explain the classification.
+- Design and test approval never authorize committing, pushing, or updating a PR.
+
 ## Overview
 
 Subdirectories are GitHub organization/user clones. See [agents-refs/directory-summaries.md](agents-refs/directory-summaries.md) for details.
@@ -127,6 +141,7 @@ Follow [agents-refs/markdown-guidelines.md](agents-refs/markdown-guidelines.md) 
 
 ## Reference Files
 
+- [agents-refs/design-first-workflow.md](agents-refs/design-first-workflow.md) — risk-based design and test gates, contracts, and approval scope
 - [agents-refs/documentation-guidelines.md](agents-refs/documentation-guidelines.md) — documentation-first approach, thin entry points, extraction, and reachability checks
 - [agents-refs/conventional-commits.md](agents-refs/conventional-commits.md) — commit format, types, breaking changes, examples
 - [agents-refs/pr-guidelines.md](agents-refs/pr-guidelines.md) — PR descriptions, Jira sync, Gemini reviews

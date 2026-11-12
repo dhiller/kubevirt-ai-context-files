@@ -1,5 +1,12 @@
 # Git Workflow Details
 
+## Design and Test Approval
+
+For non-trivial behavioral changes, the design and test checkpoints in the
+[Design-First Development Workflow](design-first-workflow.md) precede the
+validation and publication checkpoint below. Approval to design, test, or
+implement does not authorize committing, pushing, or creating/updating a PR.
+
 ## Validation Before Committing
 
 After any changes in a repository, ALWAYS ask the user for validation before committing or updating a PR.

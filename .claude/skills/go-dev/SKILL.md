@@ -10,6 +10,14 @@ Run the standard Go development cycle for the current repository.
 If $ARGUMENTS is given, scope operations to that component.
 Otherwise, run against the full project.
 
+## Workflow boundary
+
+This skill validates code; it does not authorize behavioral fixes when a check
+fails. Before making such changes, follow the shared
+[Design-First Development Workflow](../../../agents-refs/design-first-workflow.md).
+Validation alone does not require a design gate. Preserve the separate approval
+requirement before committing, pushing, or creating/updating a PR.
+
 ## Detecting the repository
 
 1. Determine the repo root by finding the nearest parent directory containing `go.mod` (starting from the current working directory).

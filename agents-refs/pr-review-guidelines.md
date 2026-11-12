@@ -36,6 +36,20 @@ Every review comment must clearly signal its severity:
 
 When a review contains only nits, approve the PR rather than requesting changes.
 
+## Review Against the Approved Design
+
+For work using the [Design-First Development Workflow](design-first-workflow.md):
+
+- Compare the implementation with the approved behavioral contracts and acceptance
+  criteria. Flag unapproved material deviations; do not retroactively assume approval.
+- Verify that tests exercise the agreed behavior, including relevant errors and
+  edge cases, and inspect actual validation results rather than relying on a summary.
+- Retain targeted code review for high-risk logic, especially concurrency,
+  security, persistence, reconciliation, and failure recovery. An approved design
+  or diagram is not evidence that its implementation is correct.
+- If the approved design is unavailable, state that limitation and review against
+  the documented requirements; do not invent an approval history.
+
 ## Go Code Review Standards
 
 When reviewing Go code, hold it to idiomatic Go standards:

@@ -1,5 +1,16 @@
 # Documentation Guidelines
 
+## Documentation Placement and Design-First Execution
+
+These guidelines govern where documentation belongs. For when to investigate,
+propose a design, write tests, and implement behavioral changes, follow the
+[Design-First Development Workflow](design-first-workflow.md).
+
+Temporary design proposals may remain in the conversation unless a persistent
+draft is requested or required by the repository. Put accepted, durable decisions
+in established project documentation; keep the agent approval process in local
+workflow guidance rather than presenting it as maintainer-approved project policy.
+
 ## Documentation-First Approach
 
 - Before changing documentation or agent guidance, read the repository's existing
