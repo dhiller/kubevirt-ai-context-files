@@ -11,7 +11,7 @@ You are not my assistant. You are my advisor who happens to be smarter than me. 
 6. No warm up paragraphs. Skip "There are several ways to look at this". Start with the most useful thing you can say.
 7. If I push back, don't fold. Hold your position unless I give you genuinely new information. "But I really think" is not new information
 
-Guidance for AI agents working in this directory tree. Detailed rules are in `agents-refs/` — consult them when performing the relevant action.
+Guidance for AI agents working in this directory tree. Detailed rules are in `.agents/references/` — consult them when performing the relevant action.
 
 ## Context File Guidelines
 
@@ -23,14 +23,14 @@ Guidance for AI agents working in this directory tree. Detailed rules are in `ag
 
 ## Documentation-First Approach
 
-Follow [agents-refs/documentation-guidelines.md](agents-refs/documentation-guidelines.md)
+Follow [.agents/references/documentation-guidelines.md](.agents/references/documentation-guidelines.md)
 when changing documentation or agent guidance: keep project knowledge in
 human-facing docs and agent entry points thin.
 
 ## Design-First Development
 
 For non-trivial behavioral changes, follow
-[agents-refs/design-first-workflow.md](agents-refs/design-first-workflow.md).
+[.agents/references/design-first-workflow.md](.agents/references/design-first-workflow.md).
 
 - Present evidence, behavioral contracts, and the proposed design before
   writing production code; stop for explicit approval.
@@ -43,7 +43,7 @@ For non-trivial behavioral changes, follow
 
 ## Overview
 
-Subdirectories are GitHub organization/user clones. See [agents-refs/directory-summaries.md](agents-refs/directory-summaries.md) for details.
+Subdirectories are GitHub organization/user clones. See [.agents/references/directory-summaries.md](.agents/references/directory-summaries.md) for details.
 
 The GitHub organization `kubevirt` maps to the local root `~/Projects/github.com/kubevirt.io/`, not `~/Projects/github.com/kubevirt/`.
 For example, `kubevirt/kubevirtci` is checked out at `kubevirt.io/kubevirtci/` relative to this directory.
@@ -75,18 +75,18 @@ that CI-health skill locations resolve to the canonical definitions.
 
 ## Bash Command Rules
 
-- **No shell pipelines or chaining** — every shell tool call must be a single simple command. Do not use shell pipelines, command chaining, command substitution, or subshells. Operators inside quoted non-shell expressions (such as jq filters) are allowed. Prefer built-in filtering and pagination flags. See [agents-refs/feedback-rules.md](agents-refs/feedback-rules.md#no-compound-or-piped-commands) for examples.
+- **No shell pipelines or chaining** — every shell tool call must be a single simple command. Do not use shell pipelines, command chaining, command substitution, or subshells. Operators inside quoted non-shell expressions (such as jq filters) are allowed. Prefer built-in filtering and pagination flags. See [.agents/references/feedback-rules.md](.agents/references/feedback-rules.md#no-compound-or-piped-commands) for examples.
 
 ## Git Guardrails
 
 - **Never commit to the default branch** — always create a feature branch with `--no-track` from the remote ref
-- **Always use a git worktree** for code changes outside the source checkout, under `/tmp` - see [worktree setup](agents-refs/git-workflow-details.md#worktrees)
+- **Always use a git worktree** for code changes outside the source checkout, under `/tmp` - see [worktree setup](.agents/references/git-workflow-details.md#worktrees)
 - **Push to `fork` remote only** — never `origin`. For `kubevirt.io/` repos this is critical: `origin` is upstream
-- **Conventional Commits required** — see [agents-refs/conventional-commits.md](agents-refs/conventional-commits.md)
-- **Assisted-by trailer** — AI-assisted commits must include exactly one `Assisted-by:` trailer containing the agent name, model version, and attribution email, separate from any required DCO sign-off; see [trailer policy](agents-refs/conventional-commits.md#ai-agent-trailer)
+- **Conventional Commits required** — see [.agents/references/conventional-commits.md](.agents/references/conventional-commits.md)
+- **Assisted-by trailer** — AI-assisted commits must include exactly one `Assisted-by:` trailer containing the agent name, model version, and attribution email, separate from any required DCO sign-off; see [trailer policy](.agents/references/conventional-commits.md#ai-agent-trailer)
 - **kubevirt.io repositories require DCO sign-off** - all commits must be DCO-signed-off using `git commit --signoff`, which adds the committer's `Signed-off-by:` trailer. This is separate from cryptographic signing with `-S`.
-- **No issue/PR references in commits** — put references and links in PR descriptions, not commit messages; see [commit policy](agents-refs/conventional-commits.md#no-issuepr-references-in-commit-messages)
-- **Validate before publishing changes** — run applicable checks, report results, and obtain explicit approval before committing, pushing, or updating a PR; see [approval policy](agents-refs/git-workflow-details.md#validation-before-committing)
+- **No issue/PR references in commits** — put references and links in PR descriptions, not commit messages; see [commit policy](.agents/references/conventional-commits.md#no-issuepr-references-in-commit-messages)
+- **Validate before publishing changes** — run applicable checks, report results, and obtain explicit approval before committing, pushing, or updating a PR; see [approval policy](.agents/references/git-workflow-details.md#validation-before-committing)
 - **Run golangci-lint when config exists** — if `.golangci.yml` or `.golangci.yaml` is present in the repo root, run `golangci-lint run ./...` before committing (or the Makefile `lint`/`go-lint` target if available)
 - **Run goimports after touching imports** — whenever a Go file's imports are added, removed, or reordered, run `goimports` (or `golang.org/x/tools/imports.Process`) on the file so import groups are sorted and grouped per Go conventions
 - **Run yamllint on changed YAML files** — whenever a `.yaml` or `.yml` file is added or modified, run `yamllint <file>` to check formatting before committing
@@ -95,7 +95,7 @@ that CI-health skill locations resolve to the canonical definitions.
 - **Go testing framework** — Before writing tests, check the repository’s guidance and existing tests for its preferred testing framework. Follow those conventions. If unclear and existing imports reference Ginkgo/Gomega, use Ginkgo/Gomega with dot imports.
 - **Ginkgo dot imports** — when writing Ginkgo/Gomega tests, use dot imports (`. "github.com/onsi/ginkgo"`, `. "github.com/onsi/gomega"`, `. "github.com/onsi/ginkgo/extensions/table"`) so that `Describe`, `It`, `Expect`, `DescribeTable`, `Entry`, etc. are used without a package qualifier
 
-See [agents-refs/git-workflow-details.md](agents-refs/git-workflow-details.md) for full details.
+See [.agents/references/git-workflow-details.md](.agents/references/git-workflow-details.md) for full details.
 
 ## Pull Requests
 
@@ -108,11 +108,11 @@ See [agents-refs/git-workflow-details.md](agents-refs/git-workflow-details.md) f
 - **Jira sync**: include `Jira-ticket: https://redhat.atlassian.net/browse/CNV-XXXX` in PR body
 - **Test triggers**: combine all `/test` commands into a single PR comment
 
-See [agents-refs/pr-guidelines.md](agents-refs/pr-guidelines.md) for full details.
+See [.agents/references/pr-guidelines.md](.agents/references/pr-guidelines.md) for full details.
 
 ## Jira
 
-Follow [agents-refs/jira-guidelines.md](agents-refs/jira-guidelines.md) when creating
+Follow [.agents/references/jira-guidelines.md](.agents/references/jira-guidelines.md) when creating
 or updating Jira issues: propose the creation defaults, present the intended
 changes, and obtain explicit user confirmation before writing to Jira.
 
@@ -129,11 +129,11 @@ changes, and obtain explicit user confirmation before writing to Jira.
 
 Prow approve plugin supports OWNERS regex filters. Use `/test {lane}` to trigger specific lanes, `/retest` for all failed required jobs. Never use `/retest {lane}`.
 
-See [agents-refs/prow-knowledge.md](agents-refs/prow-knowledge.md) for full details.
+See [.agents/references/prow-knowledge.md](.agents/references/prow-knowledge.md) for full details.
 
 ## Markdown Formatting
 
-Follow [agents-refs/markdown-guidelines.md](agents-refs/markdown-guidelines.md) when creating or editing Markdown. Keep raw source human-readable, especially padded and aligned tables; use repository formatting tools when available and avoid unrelated formatting changes.
+Follow [.agents/references/markdown-guidelines.md](.agents/references/markdown-guidelines.md) when creating or editing Markdown. Keep raw source human-readable, especially padded and aligned tables; use repository formatting tools when available and avoid unrelated formatting changes.
 
 ## Research Sources
 
@@ -141,16 +141,16 @@ Follow [agents-refs/markdown-guidelines.md](agents-refs/markdown-guidelines.md) 
 
 ## Reference Files
 
-- [agents-refs/design-first-workflow.md](agents-refs/design-first-workflow.md) — risk-based design and test gates, contracts, and approval scope
-- [agents-refs/documentation-guidelines.md](agents-refs/documentation-guidelines.md) — documentation-first approach, thin entry points, extraction, and reachability checks
-- [agents-refs/conventional-commits.md](agents-refs/conventional-commits.md) — commit format, types, breaking changes, examples
-- [agents-refs/pr-guidelines.md](agents-refs/pr-guidelines.md) — PR descriptions, Jira sync, Gemini reviews
-- [agents-refs/jira-guidelines.md](agents-refs/jira-guidelines.md) — issue creation defaults, change previews, user confirmation, and preservation of existing values
-- [agents-refs/pr-review-guidelines.md](agents-refs/pr-review-guidelines.md) — PR review process, nit vs error classification, Go review standards
-- [agents-refs/git-workflow-details.md](agents-refs/git-workflow-details.md) — branching, remotes, validation, worktrees, test coverage
-- [agents-refs/directory-summaries.md](agents-refs/directory-summaries.md) — subdirectory/org descriptions
-- [agents-refs/feedback-rules.md](agents-refs/feedback-rules.md) — behavioral rules from user corrections
-- [agents-refs/prow-knowledge.md](agents-refs/prow-knowledge.md) — Prow approve plugin, CI triggering, job states
-- [agents-refs/review-handling.md](agents-refs/review-handling.md) — addressing PR review comments: reply, resolve, common fix patterns
-- [agents-refs/golangci-lint-failures.md](agents-refs/golangci-lint-failures.md) — fixing lint errors properly: global config, error semantics, anti-patterns
-- [agents-refs/markdown-guidelines.md](agents-refs/markdown-guidelines.md) - readable Markdown source, table alignment, formatter selection, and validation
+- [.agents/references/design-first-workflow.md](.agents/references/design-first-workflow.md) — risk-based design and test gates, contracts, and approval scope
+- [.agents/references/documentation-guidelines.md](.agents/references/documentation-guidelines.md) — documentation-first approach, thin entry points, extraction, and reachability checks
+- [.agents/references/conventional-commits.md](.agents/references/conventional-commits.md) — commit format, types, breaking changes, examples
+- [.agents/references/pr-guidelines.md](.agents/references/pr-guidelines.md) — PR descriptions, Jira sync, Gemini reviews
+- [.agents/references/jira-guidelines.md](.agents/references/jira-guidelines.md) — issue creation defaults, change previews, user confirmation, and preservation of existing values
+- [.agents/references/pr-review-guidelines.md](.agents/references/pr-review-guidelines.md) — PR review process, nit vs error classification, Go review standards
+- [.agents/references/git-workflow-details.md](.agents/references/git-workflow-details.md) — branching, remotes, validation, worktrees, test coverage
+- [.agents/references/directory-summaries.md](.agents/references/directory-summaries.md) — subdirectory/org descriptions
+- [.agents/references/feedback-rules.md](.agents/references/feedback-rules.md) — behavioral rules from user corrections
+- [.agents/references/prow-knowledge.md](.agents/references/prow-knowledge.md) — Prow approve plugin, CI triggering, job states
+- [.agents/references/review-handling.md](.agents/references/review-handling.md) — addressing PR review comments: reply, resolve, common fix patterns
+- [.agents/references/golangci-lint-failures.md](.agents/references/golangci-lint-failures.md) — fixing lint errors properly: global config, error semantics, anti-patterns
+- [.agents/references/markdown-guidelines.md](.agents/references/markdown-guidelines.md) - readable Markdown source, table alignment, formatter selection, and validation

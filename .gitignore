@@ -12,8 +12,9 @@
 !kilo.json
 
 # Agent reference docs
-!agents-refs/
-!agents-refs/**
+!.agents/
+!.agents/references/
+!.agents/references/**
 
 # Claude Code project settings and skills (not local settings or runtime state)
 !.claude/

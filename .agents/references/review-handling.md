@@ -15,7 +15,7 @@ How to address review comments (from Gemini Code Assist, human reviewers, or oth
 
 ## Fetching Comments
 
-Follow the [shell command rules](../AGENTS.md#bash-command-rules).
+Follow the [shell command rules](../../AGENTS.md#bash-command-rules).
 Use `gh api --jq` for filtering instead of a shell pipeline.
 
 ```bash
@@ -87,7 +87,7 @@ mutation {
 - **Describe the fix briefly** — what changed and why it addresses the concern
 - **Include a code snippet** only when the fix pattern is non-obvious or the reviewer suggested a specific approach worth confirming
 - **Do not repeat AI attribution in thread replies** - keep the footer on the main generated PR
-  description or review summary instead, following the GitHub guidelines in `../AGENTS.md`.
+  description or review summary instead, following the GitHub guidelines in `../../AGENTS.md`.
 - **Do not argue with valid feedback** — if the reviewer is right, fix it and say so
 - **Only push back with evidence** — if a suggestion would introduce a regression or is based on a misunderstanding, explain why with references to the code
 

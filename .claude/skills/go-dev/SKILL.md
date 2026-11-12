@@ -14,7 +14,7 @@ Otherwise, run against the full project.
 
 This skill validates code; it does not authorize behavioral fixes when a check
 fails. Before making such changes, follow the shared
-[Design-First Development Workflow](../../../agents-refs/design-first-workflow.md).
+[Design-First Development Workflow](../../../.agents/references/design-first-workflow.md).
 Validation alone does not require a design gate. Preserve the separate approval
 requirement before committing, pushing, or creating/updating a PR.
 

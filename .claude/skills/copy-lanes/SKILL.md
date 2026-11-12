@@ -12,7 +12,7 @@ A "lane" is a set of Prow job definitions (presubmit + periodic) for a specific 
 ## Approval checkpoints
 
 Follow the shared
-[Design-First Development Workflow](../../../agents-refs/design-first-workflow.md)
+[Design-First Development Workflow](../../../.agents/references/design-first-workflow.md)
 before changing CI behavior. Present the intended lane contracts, schedule impact,
 dry-run evidence, and validation plan for design approval. Then prepare the
 approved tests or alternative checks and obtain implementation approval before
