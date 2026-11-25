@@ -79,6 +79,15 @@ Verify discovery in a fresh process after changing paths: each expected name
 should appear once and resolve to its canonical definition. For Kilo, inspect the
 active `skills.paths` configuration and verify with `kilo debug skill`.
 
+## Model Advice
+
+Before substantial work, consult
+[Model Advice](.agents/references/model-advice.md).
+If another model is better suited, briefly recommend its exact model ID and
+explain why. Do not switch automatically or block progress. Avoid repeating
+advice unless the task or its complexity changes. Do not claim to know the active
+model unless it is available in context.
+
 ## Bash Command Rules
 
 - **No shell pipelines or chaining** — every shell tool call must be a single simple command. Do not use shell pipelines, command chaining, command substitution, or subshells. Operators inside quoted non-shell expressions (such as jq filters) are allowed. Prefer built-in filtering and pagination flags. See [.agents/references/feedback-rules.md](.agents/references/feedback-rules.md#no-compound-or-piped-commands) for examples.

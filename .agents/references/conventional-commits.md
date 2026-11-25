@@ -39,8 +39,18 @@ AI-assisted commits must include exactly one `Assisted-by:` trailer in the foote
 Assisted-by: <Agent Name> <Model Version> <email>
 ```
 
-Use the actual agent name, model version, and attribution email. Do not guess
-missing values; resolve them before committing.
+Use the actual agent name and model version. Do not guess these values; resolve
+them before committing.
+
+By default, use an address on the model provider's domain, unless the user or
+applicable repository guidance explicitly specifies another address. A reasonable
+address such as `noreply@openai.com` for an OpenAI model is sufficient; checking
+whether the address is documented or accepts mail is not required. Keep the
+actual agent name and model version in the trailer, even when the email uses the
+model provider's domain.
+
+If the model provider's domain is unknown and no explicit override is available,
+ask the user to designate an attribution email before committing.
 
 Use `Assisted-by:` rather than an additional `Co-Authored-By:` trailer for AI
 attribution. Preserve attribution belonging to human contributors.
